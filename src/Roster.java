@@ -7,16 +7,20 @@
 
 public class Roster {
     private Student[] roster;
-    private int sAize;
+    private int size;
 
     /**
      * This method finds specific student and returns their index in the roster.
      * @param student This student is the one we need to find.
      * @return the index of the student. If the student is not in the roster -1 is returned.
      */
-    private int find(Student student){ //search the given student in roster
+    private int find(Profile student){ //search the given student in roster
         for(int i = 0; i < roster.length; i++){
-            if(roster[i] != null && roster[i].compareTo(student) == 0){
+            if(roster[i] != null && roster[i].getProfile().getFname().equalsIgnoreCase(student.getFname()) == true &&
+                    roster[i].getProfile().getLname().equalsIgnoreCase(student.getLname()) == true &&
+                    roster[i].getProfile().getDob().getDay() == student.getDob().getDay() &&
+                    roster[i].getProfile().getDob().getMonth() == student.getDob().getMonth() &&
+                    roster[i].getProfile().getDob().getYear() == student.getDob().getYear()){
                 return i;
             }
         }
@@ -37,6 +41,24 @@ public class Roster {
             }
             roster = newRoster;
         }
+    }
+
+    /**
+     * This method gets the student based on the input profile.
+     * @param student is the input profile of the student we need to find.
+     * @return the student of the givin input profile.
+     */
+    public Student getType(Profile student){
+        for(int i = 0; i < roster.length; i++){
+            if(roster[i] != null && roster[i].getProfile().getFname().equalsIgnoreCase(student.getFname()) == true &&
+                    roster[i].getProfile().getLname().equalsIgnoreCase(student.getLname()) == true &&
+                    roster[i].getProfile().getDob().getDay() == student.getDob().getDay() &&
+                    roster[i].getProfile().getDob().getMonth() == student.getDob().getMonth() &&
+                    roster[i].getProfile().getDob().getYear() == student.getDob().getYear()){
+                return roster[i];
+            }
+        }
+        return null;
     }
 
     /**
@@ -66,9 +88,13 @@ public class Roster {
      * @return If the student is in the roster and is removed the method will return true, if the student
      * is not in the roster then it will return false.
      */
-    public boolean remove(Student student){ //maintain the order after remove
+    public boolean remove(Profile student){ //maintain the order after remove
         for(int i = 0; i < roster.length; i++){
-            if(roster[i] != null && roster[i].compareTo(student) == 0){
+            if(roster[i] != null && roster[i].getProfile().getFname().equalsIgnoreCase(student.getFname()) == true &&
+                    roster[i].getProfile().getLname().equalsIgnoreCase(student.getLname()) == true &&
+                    roster[i].getProfile().getDob().getDay() == student.getDob().getDay() &&
+                    roster[i].getProfile().getDob().getMonth() == student.getDob().getMonth() &&
+                    roster[i].getProfile().getDob().getYear() == student.getDob().getYear()){
                 for(int j = i; j < roster.length - 1; j++){
                     roster[j] = roster[j+1];
                 }
@@ -84,7 +110,7 @@ public class Roster {
      * @return Returns false if the roster is empty or if the student is not in the roster.
      * True if the student is in the roster.
      */
-    public boolean contains(Student student){ //if the student is in roster
+    public boolean contains(Profile student){ //if the student is in roster
         if(roster == null){
             return false;
         }
@@ -92,11 +118,11 @@ public class Roster {
             if(roster[i] == null){
                 return false;
             }else{
-                if(roster[i].getProfile().getFname().equalsIgnoreCase(student.getProfile().getFname()) == true &&
-                        roster[i].getProfile().getLname().equalsIgnoreCase(student.getProfile().getLname()) == true &&
-                        roster[i].getProfile().getDob().getDay() == student.getProfile().getDob().getDay() &&
-                        roster[i].getProfile().getDob().getMonth() == student.getProfile().getDob().getMonth() &&
-                        roster[i].getProfile().getDob().getYear() == student.getProfile().getDob().getYear()){
+                if(roster[i].getProfile().getFname().equalsIgnoreCase(student.getFname()) == true &&
+                        roster[i].getProfile().getLname().equalsIgnoreCase(student.getLname()) == true &&
+                        roster[i].getProfile().getDob().getDay() == student.getDob().getDay() &&
+                        roster[i].getProfile().getDob().getMonth() == student.getDob().getMonth() &&
+                        roster[i].getProfile().getDob().getYear() == student.getDob().getYear()){
                     return true;
                 }
             }
@@ -248,7 +274,7 @@ public class Roster {
      * @return Returns true if the student major is valid and false if the student is not found or if
      * an invalid major was passed in.
      */
-    public boolean changeMajor(Student student, String[] commands){
+    public boolean changeMajor(Profile student, String[] commands){
         if(contains(student) == true){
             int studentIndex = find(student);
             if(commands[4].equalsIgnoreCase("CS") == true){

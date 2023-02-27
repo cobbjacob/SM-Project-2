@@ -3,10 +3,39 @@
  * @author Jaison Prajapati, Jacob Cobb
  */
 
-public class Student implements Comparable<Student> {
+public abstract class Student implements Comparable<Student> {
     private Profile profile;
     private Major major; //Major is an enum type
     private int creditCompleted;
+    private Resident resident;
+    private NonResident nonResident;
+    private International international;
+    private boolean studyAbroad;
+    private TriState triState;
+    private String state;
+
+    /**
+     * This methos checks if the credits enrolled is valid.
+     * @param creditEnrolled is the input credits enrolled.
+     * @return true if the input if valid and false if it is not valid.
+     */
+    public boolean isValid(int creditEnrolled){ //NEED TO FINISH THIS
+        return true;
+    } //polymorphism
+
+    /**
+     * This method is for polymorphism of the tuition due.
+     * @param creditsEnrolled is the input credits enrolled.
+     * @return the tuition due.
+     */
+    public abstract double tuitionDue(int creditsEnrolled); //polymorphism
+
+    /**
+     * This method is for polymorphism to see if a student is a resident or not.
+     * @return true if the student is a resident and false if not.
+     */
+    public abstract boolean isResident(); //polymorphism
+
 
     /**
      * This is the method which makes student objects with a passed in profile, major, and credits completed.
@@ -18,6 +47,34 @@ public class Student implements Comparable<Student> {
         this.profile = profile;
         this.major = major;
         this.creditCompleted = creditCompleted;
+    }
+
+    /**
+     * This is the method which makes student objects with a passed in profile, major, and credits completed.
+     * @param profile This is the profile which is passed in.
+     * @param major This is the major which is passed in.
+     * @param creditCompleted This is the credits completed which is passed in.
+     * @param studentState This is the students state which is passed in.
+     */
+    public Student(Profile profile, Major major, int creditCompleted, String studentState){
+        this.profile = profile;
+        this.major = major;
+        this.creditCompleted = creditCompleted;
+        this.state = studentState;
+    }
+
+    /**
+     * This is the method which makes student objects with a passed in profile, major, and credits completed.
+     * @param profile This is the profile which is passed in.
+     * @param major This is the major whick is passed in.
+     * @param creditCompleted This is the credits completed which is passed in.
+     * @param studyAbroad This is whether the student is in study abroad or not.
+     */
+    public Student(Profile profile, Major major, int creditCompleted, boolean studyAbroad){
+        this.profile = profile;
+        this.major = major;
+        this.creditCompleted = creditCompleted;
+        this.studyAbroad = studyAbroad;
     }
 
     /**
@@ -87,6 +144,38 @@ public class Student implements Comparable<Student> {
         return creditCompleted;
     }
 
+    /**
+     * Getter for the resident
+     * @return the resident
+     */
+    public Resident getResident(){
+        return resident;
+    }
+
+    /**
+     * Getter for the non resident
+     * @return the non resident
+     */
+    public NonResident getNonResident(){
+        return nonResident;
+    }
+
+    /**
+     * Getter for the international student
+     * @return the international student
+     */
+    public International getInternational(){
+        return international;
+    }
+
+    /**
+     * Getter for the triState student
+     * @return the triState student.
+     */
+    public TriState getTriState(){
+        return triState;
+    }
+
     //setters
     /**
      * Setter for new profile
@@ -110,6 +199,38 @@ public class Student implements Comparable<Student> {
      */
     public void setCreditCompleted(int newCreditCompleted){
         creditCompleted = newCreditCompleted;
+    }
+
+    /**
+     * Setter for the resident
+     * @param newResident is set
+     */
+    public void setResident(Resident newResident){
+        resident = newResident;
+    }
+
+    /**
+     * Setter for the nonresident
+     * @param newNonResident is set
+     */
+    public void setNonResident(NonResident newNonResident){
+        nonResident = newNonResident;
+    }
+
+    /**
+     * Setter for the international student
+     * @param newInternational is set
+     */
+    public void setInternational(International newInternational){
+        international = newInternational;
+    }
+
+    /**
+     * Setter for the tristate
+     * @param newTriState is set
+     */
+    public void setTriState(TriState newTriState){
+        triState = newTriState;
     }
 
     /**
@@ -168,6 +289,7 @@ public class Student implements Comparable<Student> {
 
 
 
+    /*
     public static void main(String[] args){
         Date date = new Date("1/1/2001");
         Profile p1 = new Profile("John", "Doe", date);
@@ -211,10 +333,8 @@ public class Student implements Comparable<Student> {
         actualOutput = s1.compareTo(s2);
         System.out.print("** Test case #4: Same first name but different capitalization; last name & dob are identical");
         testResult(expectedOutput, actualOutput);
-
-
-
     }
+    */
 
 }
 
